@@ -1,0 +1,45 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:2:11-39
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:1-7:12
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:4:5-78
+	android:name
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:4:22-76
+uses-permission#android.permission.INTERNET
+ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:5:5-66
+	android:name
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml:5:22-64
+uses-sdk
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		ADDED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml
+		INJECTED from C:\workspace\git_svn\MyApplication3\myrx\src\main\AndroidManifest.xml

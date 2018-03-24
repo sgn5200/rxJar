@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\workspace\\git_svn\\MyApplication3\\myrx\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v13\\values-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\sgn52\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\990de87e3777b57a1c7abc6f816eaac4\\res\\values-v13\\values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\workspace\\git_svn\\MyApplication3\\myrx\\build\\intermediates\\res\\merged\\release\\values-v13\\values-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\sgn52\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.3.1.aar\\990de87e3777b57a1c7abc6f816eaac4\\res\\values-v13\\values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    }
+                }
+            ]
+        }
+    ]
+}
