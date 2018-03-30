@@ -1,4 +1,4 @@
-package com.lansent.cannan.util.util;
+package com.lansent.cannan.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

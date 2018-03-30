@@ -1,4 +1,4 @@
-package com.lansent.cannan.util.util;
+package com.lansent.cannan.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;

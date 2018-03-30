@@ -1,4 +1,4 @@
-package com.lansent.cannan.util.util;
+package com.lansent.cannan.util;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -12,8 +12,6 @@ import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Xml;
-
-import com.lansent.cannan.util.StringUtils;
 
 import org.xmlpull.v1.XmlSerializer;
 

@@ -1,4 +1,4 @@
-package com.lansent.cannan.util.util;
+package com.lansent.cannan.util;
 
 import android.util.DisplayMetrics;
 import android.util.TypedValue;

@@ -17,7 +17,9 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -49,7 +51,7 @@ public class ApiClient {
 	private static ApiClient instance;
 	public static ApiClient getInstance(){
 		if(instance == null){
-			instance = new ApiClient(OkClient.getApiService());
+			instance = new ApiClient(RxHttpClient.getApiService(RxHttpClient.getOKClient().build(),ApiService.class));
 		}
 		return instance;
 	}
@@ -60,40 +62,47 @@ public class ApiClient {
 	}
 
 	/**
-	 * 执行网络请求
 	 *
-	 * @param p<T> p是请求的参数，见{@link URLParam }   T为data泛型
-	 *             p包含 url 以及请求方法
-	 * @return 具体 Flowable 对象
+	 * @param param  {@link URLParam p} 设置入参，url地址
+	 * @param token    {@link TypeToken token}  gson封装处理解析，T为返回类型
+	 * @param context 可能为空，如果不为空将检查网络情况
+	 * @param runIo 是否运行在io  订阅在主线程, param 为false则需自己指定线程
+	 * @return  Flowable<T>
 	 */
-	public <T extends BaseResponse<?>> Flowable<T> request(URLParam p, TypeToken<T> token, Context context) {
-		Flowable<T> netErrorFb = netError(context);
-		if (netErrorFb != null && context!=null) return netErrorFb;
+	public <T extends BaseResponse<?>> Flowable<T> request(URLParam param, TypeToken<T> token, Context context,boolean runIo) {
+		Flowable<T> netErrorFb ;
+		if (context != null && (netErrorFb = netError(context))!=null){
+			return netErrorFb;
+		}
 
 		Flowable<ResponseBody> base = null;
-		switch (p.getMethod()) {
+		switch (param.getMethod()) {
 			case ApiMethod.GET:
-				if (p.getParam() == null || p.getParam().isEmpty()) {
-					base = service.get(p.getUrl());
+				if (param.getParam() == null || param.getParam().isEmpty()) {
+					base = service.get(param.getUrl());
 				} else {
-					base = service.get(p.getUrl(), p.getParam());
+					base = service.get(param.getUrl(), param.getParam());
 				}
 				break;
 			case ApiMethod.POST:
-				base = service.post(p.getUrl(), p.getParam());
+				base = service.post(param.getUrl(), param.getParam());
 				break;
 			case ApiMethod.PUT:
-				base = service.put(p.getUrl(), p.getParam());
+				base = service.put(param.getUrl(), param.getParam());
 				break;
 			case ApiMethod.DELETE:
-				base = service.delete(p.getUrl(), p.getParam());
+				base = service.delete(param.getUrl(), param.getParam());
 				break;
 			default:
 				Log.e(TAG, " method is null");
 				break;
 		}
+		if(runIo){
+			return   flatMapOb(base,token).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+		}
 		return flatMapOb(base,token);
 	}
+
 
 	/**
 	 * 检查网络情况

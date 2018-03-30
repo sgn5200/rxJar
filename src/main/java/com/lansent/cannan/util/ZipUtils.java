@@ -1,8 +1,5 @@
 package com.lansent.cannan.util;
 
-import com.lansent.cannan.util.util.CloseUtils;
-import com.lansent.cannan.util.util.FileUtils;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
