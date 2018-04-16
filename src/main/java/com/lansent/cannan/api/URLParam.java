@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class URLParam {
 	private String url;
 	private HashMap<String, String> map;
-	private int method = ApiMethod.GET;
+	private int method = Method.GET;
 
 	/**
 	 * 网络请求地址
@@ -29,18 +29,18 @@ public class URLParam {
 
 	/**
 	 * 网络请求方法
-	 * @return  {@link ApiMethod}
+	 * @return  {@link Method}
 	 */
 	public int getMethod() {
 		return method;
 	}
 
 	/**
-	 *  {@link ApiMethod}
+	 *  {@link Method}
 	 * 设置网络请求方法 get or post or put...
-	 * @param  method  接收参数限定为 {@link ApiMethod}
+	 * @param  method  接收参数限定为 {@link Method}
 	 */
-	public void setMethod(@ApiMethod.METHOD int method) {
+	public void setMethod(@Method.METHOD int method) {
 		this.method = method;
 	}
 

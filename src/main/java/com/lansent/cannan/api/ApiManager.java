@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
 
 /**
  * Description    : api 请求的封装
@@ -30,7 +31,7 @@ import okhttp3.ResponseBody;
  * CreateAuthor: Cannan
  * Create time   : 2017/7/26 0026.
  */
-public class ApiClient {
+public class ApiManager {
 
 	private static String TAG = "API_TAG";
 
@@ -40,24 +41,48 @@ public class ApiClient {
 	private ApiService service;
 
 	/**
+	 * client 请求参数配置
+	 */
+	private static RxHttpClient.Builder config;
+
+	/**
 	 * retrofit 请求service
 	 *
-	 * @param service 由Retrofit 包装的service
+	 * @param client 由Retrofit re
 	 */
-	private ApiClient(ApiService service) {
-		this.service = service;
+	private ApiManager(Retrofit client) {
+		this.service = client.create(ApiService.class);
 	}
 	
-	private static ApiClient instance;
-	public static ApiClient getInstance(){
-		if(instance == null){
-			instance = new ApiClient(RxHttpClient.getApiService(RxHttpClient.getOKClient().build(),ApiService.class));
+	private static ApiManager defaullz,instance;
+	public static ApiManager getDefault(){
+		if(defaullz == null){
+			defaullz = new ApiManager(RxHttpClient.getClient(getConfig()));
 		}
-		return instance;
+		return defaullz;
 	}
 
-	public static ApiClient getInstance(ApiService service){
-		instance = new ApiClient(service);
+	 public static RxHttpClient.Builder getConfig(){
+		  if(config==null){
+		  	config = new RxHttpClient.Builder();
+		  }
+		  return config;
+	 }
+
+	 public static void setConfig(RxHttpClient.Builder builder){
+	 	config = builder;
+	 }
+
+	/**
+	 * 自定义配置
+	 * @param config 不可为空
+	 * @return
+	 */
+	public static ApiManager getInstance(RxHttpClient.Builder config){
+	 	if(instance == null) {
+	 		ApiManager.config = config;
+			instance = new ApiManager(RxHttpClient.getClient(config));
+		}
 		return instance;
 	}
 
@@ -77,20 +102,20 @@ public class ApiClient {
 
 		Flowable<ResponseBody> base = null;
 		switch (param.getMethod()) {
-			case ApiMethod.GET:
+			case Method.GET:
 				if (param.getParam() == null || param.getParam().isEmpty()) {
 					base = service.get(param.getUrl());
 				} else {
 					base = service.get(param.getUrl(), param.getParam());
 				}
 				break;
-			case ApiMethod.POST:
+			case Method.POST:
 				base = service.post(param.getUrl(), param.getParam());
 				break;
-			case ApiMethod.PUT:
+			case Method.PUT:
 				base = service.put(param.getUrl(), param.getParam());
 				break;
-			case ApiMethod.DELETE:
+			case Method.DELETE:
 				base = service.delete(param.getUrl(), param.getParam());
 				break;
 			default:
@@ -164,14 +189,33 @@ public class ApiClient {
 		});
 	}
 
+	/**
+	 * post 表单上传
+	 * @param url
+	 * @param body
+	 * @param map
+	 * @return
+	 */
 	public  Flowable<ResponseBody> uploadFile(String url, RequestBody body, HashMap<String,String> map){
 		return service.uploadFile(url,body);
 	}
 
-	public Flowable<ResponseBody> requestUploadWork(String url,List<MultipartBody.Part> parts,	Map<String, String> map){
+	/**
+	 * post 表单参数上传
+	 * @param url
+	 * @param parts
+	 * @param map
+	 * @return
+	 */
+	public Flowable<ResponseBody> requestUploadWork(String url, List<MultipartBody.Part> parts, Map<String, String> map){
 		return service.requestUploadWork(url,map,parts);
 	}
 
+	/**
+	 * GET 下载
+	 * @param url
+	 * @return
+	 */
 	public Flowable<ResponseBody> download(String url){
 		return  service.download(url);
 	}

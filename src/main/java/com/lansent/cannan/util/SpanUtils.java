@@ -381,7 +381,7 @@ public final class SpanUtils {
 
     /**
      * 设置点击事件
-     * <p>需添加view.setMovementMethod(LinkMovementMethod.getInstance())</p>
+     * <p>需添加view.setMovementMethod(LinkMovementMethod.getDefault())</p>
      *
      * @param clickSpan 点击事件
      * @return {@link SpanUtils}
@@ -393,7 +393,7 @@ public final class SpanUtils {
 
     /**
      * 设置超链接
-     * <p>需添加view.setMovementMethod(LinkMovementMethod.getInstance())</p>
+     * <p>需添加view.setMovementMethod(LinkMovementMethod.getDefault())</p>
      *
      * @param url 超链接
      * @return {@link SpanUtils}

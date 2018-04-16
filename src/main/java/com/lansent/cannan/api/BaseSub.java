@@ -106,13 +106,21 @@ public abstract class BaseSub<T extends BaseResponse<?>>
 			Log.e(TAG,"error code = "+httpException.code());
 			switch (httpException.code()) {
 				case UNAUTHORIZED:
+					return "证书认证错误";
 				case FORBIDDEN:
+					return "网页禁止访问";
 				case NOT_FOUND:
+					return "网页找不到";
 				case REQUEST_TIMEOUT:
+					return "请求超时";
 				case GATEWAY_TIMEOUT:
+					return "请求超时";
 				case INTERNAL_SERVER_ERROR:
+					return "服务器异常";
 				case BAD_GATEWAY:
+					return "网关错误";
 				case SERVICE_UNAVAILABLE:
+					return "服务不可用";
 				default:
 					return "网络错误";  //均视为网络错误
 			}

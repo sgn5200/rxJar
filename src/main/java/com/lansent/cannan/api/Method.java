@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  * Create time   : 2017/9/30 0030     上午 10:41
  */
 
-public interface ApiMethod {
+public interface Method {
 
  /**
   * get 请求方式

@@ -23,7 +23,7 @@ public class App extends Application {
 		super.onCreate();
 		mContext = this;
 
-//		RxEvent.getInstance().register(BaseResponse.class, new Consumer<BaseResponse>() {
+//		RxEvent.getDefault().register(BaseResponse.class, new Consumer<BaseResponse>() {
 //			@Override
 //			public void accept(BaseResponse ba) throws Exception {
 //
@@ -35,11 +35,11 @@ public class App extends Application {
 //			}
 //		});
 //
-//		RxEvent.getInstance().unRegister(BaseResponse.class);
+//		RxEvent.getDefault().unRegister(BaseResponse.class);
 //
 //
 //
-//		ApiClient.getInstance().request(new URLParam(""), new TypeToken<BaseResponse<String>>() {}, this)
+//		ApiClient.getDefault().request(new URLParam(""), new TypeToken<BaseResponse<String>>() {}, this)
 //				.subscribe(new BaseSub<BaseResponse<String>>() {
 //					@Override
 //					public void callSuccess(BaseResponse<String> response) {
@@ -58,7 +58,7 @@ public class App extends Application {
 //				});
 //
 //		BaseResponse baseResponse = new BaseResponse();
-//		RxEvent.getInstance().post(baseResponse);
+//		RxEvent.getDefault().post(baseResponse);
 //		git init
 //		git add README.md
 //		git commit -m "first commit"
