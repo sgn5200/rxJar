@@ -1,6 +1,7 @@
 package com.lansent.cannan.api;
 
 import android.net.ParseException;
+import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
 import com.lansent.cannan.util.Log;
@@ -67,6 +68,10 @@ public abstract class BaseSub<T extends BaseResponse<?>>
 
 	@Override
 	public void onError(Throwable t) {
+		if(t==null || TextUtils.isEmpty(t.getMessage())){
+			iApiBack.callError("未知错误");
+			return;
+		}
 		Log.e(TAG,t.getMessage());
 		if (t.getMessage().endsWith("No address associated with hostname")) {
 			iApiBack.callError("服务器地址错误");

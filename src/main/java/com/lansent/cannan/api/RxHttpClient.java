@@ -3,7 +3,10 @@ package com.lansent.cannan.api;
 import android.text.TextUtils;
 
 import com.lansent.cannan.api.cookie.AddCookiesInterceptor;
+import com.lansent.cannan.api.cookie.OkNetworkMonitorInterceptor;
 import com.lansent.cannan.api.cookie.ReceivedCookiesInterceptor;
+import com.lansent.cannan.data.MemoryCache;
+import com.lansent.cannan.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,46 +29,74 @@ public class RxHttpClient {
 		private X509TrustManager trustManager;
 		private boolean useCookie = false;
 		private String baseUrl;
-		private static Builder builder = new Builder();
+		private String cookiedId;
+		private boolean isStetho;
+
+		public boolean isStetho() {
+			return isStetho;
+		}
+
+		public Builder setStetho(boolean stetho) {
+			isStetho = stetho;
+			return this;
+		}
+
+		public String getCookiedId() {
+			return this.cookiedId;
+		}
+
+		public String getBaseUrl() {
+			return this.baseUrl;
+		}
+
+		public void setCookiedId(String cookiedId) {
+			this.cookiedId = cookiedId;
+			MemoryCache.getInstance().put("Cookie",cookiedId);
+		}
+
+		public Builder setLogEnable(boolean enable){
+			Log.enable = enable;
+			return this;
+		}
 
 		public  Builder setConnectTimeout(int connectTimeout) {
-			builder.connectTimeout = connectTimeout;
-			return builder;
+			this.connectTimeout = connectTimeout;
+			return this;
 		}
 
 		public  Builder setWriteTimeout(int writeTimeout) {
-			builder.writeTimeout = writeTimeout;
-			return builder;
+			this.writeTimeout = writeTimeout;
+			return this;
 		}
 
 		public  Builder setReadTimeout(int readTimeout) {
-			builder.readTimeout = readTimeout;
-			return builder;
+			this.readTimeout = readTimeout;
+			return this;
 		}
 
 		public  Builder setRetry(boolean retry) {
-			builder.retry = retry;
-			return builder;
+			this.retry = retry;
+			return this;
 		}
 
 		public  Builder setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
-			builder.sslSocketFactory = sslSocketFactory;
-			return builder;
+			this.sslSocketFactory = sslSocketFactory;
+			return this;
 		}
 
 		public  Builder setTrustManager(X509TrustManager trustManager) {
-			builder.trustManager = trustManager;
-			return builder;
+			this.trustManager = trustManager;
+			return this;
 		}
 
 		public Builder setUseCookie(boolean useCookie) {
-			builder.useCookie = useCookie;
-			return builder;
+			this.useCookie = useCookie;
+			return this;
 		}
 
 		public Builder setBaseUrl(String baseUrl) {
-			builder.baseUrl = baseUrl;
-			return builder;
+			this.baseUrl = baseUrl;
+			return this;
 		}
 	}
 
@@ -83,9 +114,11 @@ public class RxHttpClient {
 			builder.addInterceptor(new AddCookiesInterceptor());
 			builder.addInterceptor(new ReceivedCookiesInterceptor());
 		}
-
+		builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
 		if(!TextUtils.isEmpty(config.baseUrl)){
 			reBuilder.baseUrl(config.baseUrl);
+		}else{
+			reBuilder.baseUrl("http://192.168.41.6");
 		}
 		reBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create()); //添加RX和Retrofit结合的adapter
 		//.addConverterFactory(GsonConverterFactory.create(new Gson()));  //该结构不需要实现Gson，已经自己处理

@@ -54,14 +54,12 @@ public class ApiManager {
 		this.service = client.create(ApiService.class);
 	}
 	
-	private static ApiManager defaullz,instance;
-	public static ApiManager getDefault(){
-		if(defaullz == null){
-			defaullz = new ApiManager(RxHttpClient.getClient(getConfig()));
-		}
-		return defaullz;
-	}
+	private static ApiManager instance;
 
+	/**
+	 *  http请求详细配置获取
+	 * @return
+	 */
 	 public static RxHttpClient.Builder getConfig(){
 		  if(config==null){
 		  	config = new RxHttpClient.Builder();
@@ -69,6 +67,10 @@ public class ApiManager {
 		  return config;
 	 }
 
+	/**
+	 * 请求配置设置 eg：超时，缓存，重连。。
+	 * @param builder
+	 */
 	 public static void setConfig(RxHttpClient.Builder builder){
 	 	config = builder;
 	 }
@@ -85,6 +87,23 @@ public class ApiManager {
 		}
 		return instance;
 	}
+
+	/**
+	 * 自定义配置
+	 * @return
+	 */
+	public static ApiManager getInstance(){
+		if(config == null){
+			Log.e(TAG,"还没有配置Build信息");
+			return null;
+		}
+
+		if(instance == null) {
+			instance = new ApiManager(RxHttpClient.getClient(config));
+		}
+		return instance;
+	}
+
 
 	/**
 	 *
@@ -123,9 +142,9 @@ public class ApiManager {
 				break;
 		}
 		if(runIo){
-			return   flatMapOb(base,token).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+			return   flatMapOb(param,base,token).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 		}
-		return flatMapOb(base,token);
+		return flatMapOb(param,base,token);
 	}
 
 
@@ -157,13 +176,14 @@ public class ApiManager {
 	 * @param <T>  解析的泛型
 	 * @return Flowable<BaseResponse<T>
 	 */
-	private <T extends BaseResponse<?>> Flowable<T> flatMapOb(Flowable<ResponseBody> base,final TypeToken<T> token) {
+	private <T extends BaseResponse<?>> Flowable<T> flatMapOb(final URLParam param,Flowable<ResponseBody> base,final TypeToken<T> token) {
 		return base.flatMap(new Function<ResponseBody, Publisher<T>>() {
 			@Override
 			public Publisher<T> apply(ResponseBody responseBody) throws Exception {
 				T response = null;
 				String dataStr = responseBody.string();
-//				Log.i(TAG, dataStr);
+				Log.i(TAG, param.getUrl());
+				Log.i(TAG, dataStr);
 				Gson gson = new Gson();
 				try{
 					response =  gson.fromJson(dataStr,token.getType());
