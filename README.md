@@ -1,5 +1,14 @@
 # rxJar
-rx with retrofit2.0 for eclipse and android studio
+rx with retrofit2.0 for eclipse and android studio 
+自己封装的库，一个rxJar的模块，可使用于studio中，也可使用在eclipse中，在eclipce中需要使用将该项目导出为jar包，具体导出方法在Android studio Terminal中执行 gradlew makeJar 生成jar包立即可用。 根目录存在一个cannan.jar就是早期导出的jar包，不包含新的更改。
+	
+# 初始化
+
+//setStetho为是否开启网络抓包，需要存储权限
+ 在Application oncreate()中Utils.init(this, ApiManager.getConfig().setStetho(true));  //初始化
+	
+# 使用例子	
+	
 	private void request() {
 		URLParam param = new URLParam("http://gank.io/api/xiandu/categories");
 		param.setMethod(Method.GET);
