@@ -3,12 +3,9 @@ package com.lansent.cannan.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.lansent.cannan.util.Log;
 
@@ -22,28 +19,21 @@ import com.lansent.cannan.util.Log;
  * CreateAuthor: Cannan
  * Create time   : 2017/9/26 0026.  下午 4:53
  */
-public abstract class AbsBaseFragment extends Fragment {
+public class BaseFragment extends Fragment {
 
-    public AbsBaseActivity baseActivity;
-    private View root;
+    public BaseActivity baseActivity;
+    protected View root;
      public String TAG=getClass().getSimpleName();
 
     public boolean init;
-    /**
-     * @return Layout布局id，初始化
-     */
-    public abstract
-    @LayoutRes
-    int getLayout();
 
-    public abstract void initViews();
 
     /*******************lifecycle start************************/
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
         Log.i(TAG);
-        baseActivity = (AbsBaseActivity) context;
+        baseActivity = (BaseActivity) context;
     }
 
     @Override
@@ -51,25 +41,8 @@ public abstract class AbsBaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         Log.i(TAG);
-
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(getLayout(), null, false);
-        initViews();
-        Log.i(TAG);
-
-        return root;
-    }
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
 
     @Override
     public void onStart() {

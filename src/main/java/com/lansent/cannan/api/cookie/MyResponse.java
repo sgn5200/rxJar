@@ -17,6 +17,8 @@ public class MyResponse implements Parcelable {
 	String responseHead;
 	String bodyEntity;
 
+
+	
 	public String getRequestId() {
 		return requestId;
 	}

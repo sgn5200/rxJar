@@ -114,7 +114,11 @@ public class RxHttpClient {
 			builder.addInterceptor(new AddCookiesInterceptor());
 			builder.addInterceptor(new ReceivedCookiesInterceptor());
 		}
-		builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
+
+		if(config.isStetho()) {
+			builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
+		}
+
 		if(!TextUtils.isEmpty(config.baseUrl)){
 			reBuilder.baseUrl(config.baseUrl);
 		}else{

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.View;
@@ -25,7 +24,7 @@ import com.lansent.cannan.util.Log;
  * Create time   : 2017/9/26 0026.  下午 4:53
  */
 
-public abstract class AbsBaseActivity extends Activity {
+public class BaseActivity extends Activity {
 	/**
 	 * 打印日志标签，子类无需重复定义和赋值
 	 */
@@ -35,20 +34,7 @@ public abstract class AbsBaseActivity extends Activity {
 	 * 界面组件T
 	 */
 	private SparseArray<View> mViews = new SparseArray<>();
-
-	/**
-	 * @return Layout布局id，初始化
-	 */
-	public abstract @LayoutRes int getLayout();
-
-	/**
-	 * 初始化View组件，子类实现时注意onCreate中调用顺序
-	 * 该方法在父类的onCreate中调用，所以如果在onCrate中
-	 * 执行其他方法可能导致NPE
-	 */
-	public abstract void initViews();
-
-
+	
 	/**
 	 * 给指定ID的视图添加点击事件
 	 * @param listener
@@ -165,12 +151,10 @@ public abstract class AbsBaseActivity extends Activity {
 
 	/**********************************生命周期**************************************/
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected  void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(getLayout());
-		Log.i(TAG);
-		initViews();
-
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 	}
 
 	/**
@@ -191,42 +175,50 @@ public abstract class AbsBaseActivity extends Activity {
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		Log.i(TAG);
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		Log.i(TAG);
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.i(TAG);
+
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.i(TAG);
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		Log.i(TAG);
+		if(!"BaseActivity".equals(TAG))
+			Log.i(TAG);
 
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		if(!"BaseActivity".equals(TAG)) {
+			Log.i(TAG);
+		}
 		mViews.clear();
-		Log.i(TAG);
 	}
 	/**********************************生命周期**************************************/
 }

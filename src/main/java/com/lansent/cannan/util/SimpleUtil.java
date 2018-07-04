@@ -64,8 +64,11 @@ public class SimpleUtil {
      * 网络是否有网络连接
      * @return true 可用
      */
-    public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkAvailable() {
+        if(null == Utils.getApp()){
+            return true;
+        }
+        ConnectivityManager manager = (ConnectivityManager)Utils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
 
         return info != null && info.isAvailable() &&   info.isConnected();

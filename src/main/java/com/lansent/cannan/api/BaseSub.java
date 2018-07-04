@@ -1,7 +1,7 @@
 package com.lansent.cannan.api;
 
 import android.net.ParseException;
-import android.text.TextUtils;
+import android.os.NetworkOnMainThreadException;
 
 import com.google.gson.JsonParseException;
 import com.lansent.cannan.util.Log;
@@ -54,26 +54,21 @@ public abstract class BaseSub<T extends BaseResponse<?>>
 
 	@Override
 	public void onNext(T response) {
-		Log.i(TAG,"res=="+response.getData());
-		
 		if(response.isSuccess()){
 			this.iApiBack.callSuccess(response);
 		}else{
 			this.iApiBack.CallFailure(response);
 		}
 	}
-	
-	
-
 
 	@Override
 	public void onError(Throwable t) {
-		if(t==null || TextUtils.isEmpty(t.getMessage())){
+		Log.i(TAG);
+		if(t==null ){
 			iApiBack.callError("未知错误");
-			return;
-		}
-		Log.e(TAG,t.getMessage());
-		if (t.getMessage().endsWith("No address associated with hostname")) {
+		}else if(t instanceof NetworkOnMainThreadException){
+			iApiBack.callError("在主线程中发起网络请求，未指定rx订阅线程");
+		}else if (t.getMessage().endsWith("No address associated with hostname")) {
 			iApiBack.callError("服务器地址错误");
 		}else {
 			iApiBack.callError(getErrorMsg(t));
@@ -140,7 +135,7 @@ public abstract class BaseSub<T extends BaseResponse<?>>
 		if (throwable instanceof ConnectException) {
 			return "连接失败";  //均视为网络错误
 		}
-		return "未知错误";          //未知错误
+		return throwable.getMessage();          //未知错误
 	}
 
 	@Override

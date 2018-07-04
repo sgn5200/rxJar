@@ -11,7 +11,6 @@ package com.lansent.cannan.api.cookie;
 
 
 import com.lansent.cannan.api.ApiManager;
-import com.lansent.cannan.app.App;
 import com.lansent.cannan.util.Log;
 
 import java.io.BufferedReader;
@@ -122,7 +121,7 @@ public class OkNetworkMonitorInterceptor implements Interceptor {
 			String body = bodyBuilder.toString();
 			myResponse.setBodyEntity(body);
 //			Log.i(TAG, "body----" + body);
-			App.getInstance().startInterceptor(myResponse);
+			ApiManager.getInstance().startInterceptor(myResponse);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Log.e(TAG, e.getMessage());

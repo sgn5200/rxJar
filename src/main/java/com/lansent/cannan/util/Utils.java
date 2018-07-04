@@ -6,6 +6,9 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.lansent.cannan.api.ApiManager;
+import com.lansent.cannan.api.RxHttpClient;
+
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +79,15 @@ public final class Utils {
     public static void init(@NonNull final Application app) {
         Utils.sApplication = app;
         app.registerActivityLifecycleCallbacks(mCallbacks);
+    }    /**
+     * 初始化工具类
+     *
+     * @param app 应用
+     */
+    public static void init(@NonNull final Application app, RxHttpClient.Builder builder) {
+        Utils.sApplication = app;
+        app.registerActivityLifecycleCallbacks(mCallbacks);
+        ApiManager.setConfig(builder);
     }
 
     /**
