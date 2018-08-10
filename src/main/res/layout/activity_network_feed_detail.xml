@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/network_feed_back_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/bg_back_button"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="请求详情"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Request ID"/>
+
+            <TextView
+                android:id="@+id/tvRequestId"
+                android:textColor="#14714c"
+                android:background="@drawable/bg_request_headers"
+                style="@style/DetailContent"/>
+
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Request Headers"/>
+
+            <TextView
+                android:id="@+id/tvRequestHead"
+                android:textColor="#8033b7"
+                android:background="@drawable/bg_request_headers"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Response Headers"/>
+
+            <TextView
+                android:id="@+id/tvResponseHead"
+                android:textColor="#257ada"
+                android:background="@drawable/bg_response_headers"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Response"/>
+
+            <TextView
+                android:id="@+id/tvResponseBody"
+                android:textColor="#4dac41"
+                android:background="@drawable/bg_response"
+                style="@style/DetailContent"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

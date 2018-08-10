@@ -7,6 +7,9 @@ import android.annotation.SuppressLint;
 import android.text.Html;
 import android.text.Spanned;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 字符串工具
  */
@@ -82,5 +85,10 @@ public class StringUtils {
 		mStrings[1] = identity.substring(10, 12);
 		mStrings[2] = identity.substring(12, 14);
 		return mStrings;
+	}
+
+	public static String getTimeStr(String reg,long time){
+		SimpleDateFormat sdf = new SimpleDateFormat(reg);
+		return sdf.format(new Date(time));
 	}
 }

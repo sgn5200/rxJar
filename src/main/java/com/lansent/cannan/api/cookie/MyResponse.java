@@ -12,13 +12,21 @@ import android.os.Parcelable;
  */
 
 public class MyResponse implements Parcelable {
-	String requestId;
-	String requestHead;
-	String responseHead;
-	String bodyEntity;
+	private String requestId;
+	private String requestHead;
+	private String responseHead;
+	private String bodyEntity;
 
+	private String createTime;
 
-	
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	public String getRequestId() {
 		return requestId;
 	}
@@ -62,6 +70,7 @@ public class MyResponse implements Parcelable {
 		dest.writeString(this.requestHead);
 		dest.writeString(this.responseHead);
 		dest.writeString(this.bodyEntity);
+		dest.writeString(this.createTime);
 	}
 
 	public MyResponse() {
@@ -72,9 +81,10 @@ public class MyResponse implements Parcelable {
 		this.requestHead = in.readString();
 		this.responseHead = in.readString();
 		this.bodyEntity = in.readString();
+		this.createTime = in.readString();
 	}
 
-	public static final Creator<MyResponse> CREATOR = new Creator<MyResponse>() {
+	public static final Parcelable.Creator<MyResponse> CREATOR = new Parcelable.Creator<MyResponse>() {
 		@Override
 		public MyResponse createFromParcel(Parcel source) {
 			return new MyResponse(source);

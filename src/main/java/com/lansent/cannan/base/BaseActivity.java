@@ -1,11 +1,11 @@
 package com.lansent.cannan.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,7 +24,7 @@ import com.lansent.cannan.util.Log;
  * Create time   : 2017/9/26 0026.  下午 4:53
  */
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 	/**
 	 * 打印日志标签，子类无需重复定义和赋值
 	 */

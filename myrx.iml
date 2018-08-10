@@ -110,17 +110,22 @@
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\okio-1.13.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\retrofit-2.3.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.android.support:transition-25.3.1" level="project" />
+    <orderEntry type="library" name="com.android.support:design-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-ui-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-25.3.1" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\rxjava-2.0.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\adapter-rxjava2-2.3.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\reactive-streams-1.0.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-25.3.1" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\gson-2.7.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-25.3.1" level="project" />
+    <orderEntry type="library" name="com.android.support:recyclerview-v7-25.3.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:25.3.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-25.3.1" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\workspace\git_svn\MyApplication3\myrx\libs\rxandroid.jar:unspecified@jar" level="project" />

@@ -12,6 +12,7 @@ package com.lansent.cannan.api.cookie;
 
 import com.lansent.cannan.api.ApiManager;
 import com.lansent.cannan.util.Log;
+import com.lansent.cannan.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -51,11 +52,11 @@ public class OkNetworkMonitorInterceptor implements Interceptor {
 
 			Request request = chain.request();
 			myResponse.setRequestId(request.method().toUpperCase() + " " + request.url().toString());
-			Log.i(TAG, "request headers " + request.headers().toString());
+//			Log.i(TAG, "request headers " + request.headers().toString());
 			myResponse.setRequestHead(request.headers().toString());
 
 			Response response = chain.proceed(request);
-			Log.i(TAG, "response headers " + response.message());
+//			Log.i(TAG, "response headers " + response.message());
 
 			StringBuffer sb = new StringBuffer();
 			sb.append("Version: ")
@@ -120,6 +121,7 @@ public class OkNetworkMonitorInterceptor implements Interceptor {
 			}
 			String body = bodyBuilder.toString();
 			myResponse.setBodyEntity(body);
+			myResponse.setCreateTime(StringUtils.getTimeStr("yy-MM-dd HH:mm:ss",System.currentTimeMillis()));
 //			Log.i(TAG, "body----" + body);
 			ApiManager.getInstance().startInterceptor(myResponse);
 		} catch (IOException e) {

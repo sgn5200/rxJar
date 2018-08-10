@@ -28,6 +28,7 @@ import com.lansent.cannan.util.Utils;
 import org.reactivestreams.Publisher;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,8 +170,8 @@ public class ApiManager {
 	 * 启动远程服务
 	 */
 	public void bindRemount() {
-		if(!ApiManager.getConfig().isStetho()){
-			Log.i(TAG,"没有设置抓包");
+		if (!ApiManager.getConfig().isStetho()) {
+			Log.i(TAG, "没有设置抓包");
 			return;
 		}
 		try {
@@ -186,10 +187,11 @@ public class ApiManager {
 			intent.setPackage("com.shang.cannan.mynetpackage");
 			intent.setAction("com.shang.cannan.mynetpackage.service.NetPackageService");
 			Utils.getApp().bindService(intent, conn, Context.BIND_AUTO_CREATE);
-		}catch (ActivityNotFoundException e){
+		} catch (ActivityNotFoundException e) {
 			checkCanCache();
 		}
 	}
+
 	private ServiceConnection conn = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
@@ -205,11 +207,19 @@ public class ApiManager {
 		}
 	};
 
+	private ArrayList<MyResponse> list =  new ArrayList<>();
+
+	public ArrayList<MyResponse> getList() {
+		return list;
+	}
+
 	/**
 	 * 跨进程通信
+	 *
 	 * @param response
 	 */
 	public void startInterceptor(MyResponse response) {
+		list.add(response);
 		if (AssetsUtils.checkApkExist(Utils.getApp(), "com.shang.cannan.mynetpackage")) {
 			Log.i(TAG, "startInterceptor");
 			if (myNetService != null) {
@@ -227,9 +237,10 @@ public class ApiManager {
 
 	/**
 	 * 获取服务
+	 *
 	 * @return
 	 */
-	public IMyNetService getMyNetService(){
+	public IMyNetService getMyNetService() {
 		return myNetService;
 	}
 
@@ -336,16 +347,16 @@ public class ApiManager {
 				T response = null;
 				String dataStr = responseBody.string();
 				Log.i(TAG, param.getUrl());
-//				Log.i(TAG, dataStr);
+				Log.i(TAG, dataStr);
 				Gson gson = new Gson();
 				try {
 					response = gson.fromJson(dataStr, token.getType());
 				} catch (JsonSyntaxException e) {
 					Log.e(TAG, "解析异常：检查json格式和接收泛型");
+					 e.printStackTrace();
 				}
 				return getReturnFlowable(response);
 			}
-
 
 			private Flowable<T> getReturnFlowable(final T t) {
 				return Flowable.create(new FlowableOnSubscribe<T>() {
